@@ -1,0 +1,2 @@
+# spliteasy
+Share Expenses
