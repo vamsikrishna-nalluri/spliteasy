@@ -100,11 +100,22 @@ A section with nothing to say states "None". Every version bump adds a Changelog
 
 *Test:* All nine headings are present in order, and the latest version in the frontmatter has a matching Changelog entry. `in_review` and `active` specs must pass full scenario mapping checks.
 
-## 8. Scenarios cover happy, failure, and boundary cases
+## 8. Scenarios cover happy, failure, boundary, and verification cases
 
-Scenarios are grouped under **Happy path**, **Failure paths**, and **Boundary conditions**. Each group has at least one scenario, or explicitly states why it does not apply.
+Scenarios are grouped under **Happy path**, **Failure paths**,
+**Boundary conditions**, and **Verification scenarios**. Each group
+has at least one scenario, or explicitly states why it does not
+apply. Verification scenarios cover NFRs and implementation-level
+requirements not expressible as a single-request user journey (e.g.
+load/concurrency tests, cryptographic or algorithmic checks) — these
+test a statistical or structural property, not one request's outcome.
 
-*Test:* For specs in strict states (`in_review`, `active`), the Scenarios section has all three groups present, each with a `SCN-###` or an explicit "not applicable" reason. (Specs in `draft` or `abandoned` status may simply state "None" under the Scenarios heading. Specs in frozen states—`deprecated`, `superseded`, `archived`—are exempt from structural re-validation).
+*Test:* For specs in strict states (`in_review`, `active`), the
+Scenarios section has all four groups present, each with a `SCN-###`
+or an explicit "not applicable" reason. (Specs in `draft` or
+`abandoned` status may simply state "None" under the Scenarios
+heading. Specs in frozen states are exempt from structural
+re-validation.)
 
 ## 9. Non-functional requirements are measurable and stated once
 
@@ -141,6 +152,7 @@ Business Rules and Non-Functional Requirements must be atomic, unambiguous, and 
 * `auth`
 * `group`
 * `expense`
+* `lockout`
 
 ### Document ID Format
 * **Format:** `SE-group-001`
