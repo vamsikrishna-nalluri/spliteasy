@@ -1,0 +1,37 @@
+name: Spec Lint
+
+on:
+  pull_request:
+    paths:
+      - "specs/**"
+      - "openspec/**"
+      - "docs/business-goals.md"
+      - "scripts/lint_spec.py"
+  push:
+    branches: [main]
+    paths:
+      - "specs/**"
+      - "openspec/**"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Lint changed specs
+        run: |
+          shopt -s nullglob
+          specs=(specs/*.md)
+          if [ ${#specs[@]} -eq 0 ]; then
+            echo "No spec files found under specs/ — nothing to lint."
+            exit 0
+          fi
+          python scripts/lint_spec.py "${specs[@]}"
